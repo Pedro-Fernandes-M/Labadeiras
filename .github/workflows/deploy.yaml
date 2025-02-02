@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     
     permissions:
-     contents: write  # Add this line to ensure write permissions
+      contents: write  # Add this line to ensure write permissions
 
     steps:
       - name: Checkout code
@@ -26,6 +26,10 @@ jobs:
 
       - name: Build the project
         run: npm run build
+        env:
+          VUE_APP_API_URL: ${{ secrets.VUE_APP_API_URL }}
+          VUE_APP_PASS: ${{ secrets.VUE_APP_PASS }}
+
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
