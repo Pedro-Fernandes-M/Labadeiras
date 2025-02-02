@@ -48,7 +48,22 @@ export default createStore({
     },
   },
   actions: {
-    connectToWebSocket({ commit, state }) {
+    async fetchWebSocketURL() {
+      try {
+          const response = await fetch(process.env.VUE_APP_API_URL + '/websocket-url?token=2024');
+          if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return await response.text();
+      } catch (error) {
+          console.error('Error fetching WebSocket URL:', error);
+      }
+  },
+  async connectToWebSocket({ commit, state,dispatch }) {
+      const url = await dispatch('fetchWebSocketURL');
+        if (!url) {
+            throw new Error('WebSocket URL is undefined or empty');
+        }
       if (state.socket) {
         console.log("WebSocket já está conectado.");
         return;
@@ -56,9 +71,9 @@ export default createStore({
 
       try {
         const socket = new WebSocket(
-          "https://heavy-moose-buy.loca.lt",
+          url,
         );
-
+      
         // Event: Connection opened
         socket.onopen = () => {
           console.log("Conexão WebSocket estabelecida!");
@@ -105,7 +120,7 @@ export default createStore({
           console.error("Erro no WebSocket:", error);
         };
 
-        commit("setSocket", socket); // Store the WebSocket instance
+        commit("setSocket", socket);// Store the WebSocket instance
       } catch (error) {
         console.error(
           "Erro ao conectar ao WebSocket:",
@@ -132,11 +147,12 @@ export default createStore({
         date.getFullYear().toString() +
         (date.getMonth() + 1).toString().padStart(2, "0") +
         date.getDate().toString().padStart(2, "0");
-      const password = "labadeiras" + formattedDate;
+      const password = process.env.VUE_APP_PASS + formattedDate;
+      console.log("crypt pass:", process.env.VUE_APP_PASS);
 
       try {
         const response = await fetch(
-          `https://ghoul-optimal-bird.ngrok-free.app/${payload}`,
+          process.env.VUE_APP_API_URL+payload,
         )
         const data = await response.json();
 
