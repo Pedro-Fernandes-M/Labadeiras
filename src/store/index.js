@@ -50,7 +50,11 @@ export default createStore({
   actions: {
     async fetchWebSocketURL() {
       try {
-          const response = await fetch(process.env.VUE_APP_API_URL + '/websocket-url?token=2024');
+          const response = await fetch(process.env.VUE_APP_API_URL + 'websocket-url?token=2024',{
+            headers: {
+                'ngrok-skip-browser-warning': 'true'
+            }
+          });
           if (!response.ok) {
               throw new Error(`HTTP error! status: ${response.status}`);
           }
@@ -61,6 +65,7 @@ export default createStore({
   },
   async connectToWebSocket({ commit, state,dispatch }) {
       const url = await dispatch('fetchWebSocketURL');
+      console.log(url)
         if (!url) {
             throw new Error('WebSocket URL is undefined or empty');
         }
@@ -152,7 +157,11 @@ export default createStore({
 
       try {
         const response = await fetch(
-          process.env.VUE_APP_API_URL+payload,
+          process.env.VUE_APP_API_URL+payload,{
+            headers: {
+                'ngrok-skip-browser-warning': 'true'
+            }
+          }
         )
         const data = await response.json();
 
