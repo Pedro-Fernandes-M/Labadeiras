@@ -26,6 +26,9 @@ export default createStore({
     getBg(state) {
       return state.bg; // Returns the background image URL
     },
+    getSocket(state) {
+      return state.socket; // Returns the WebSocket instance
+    },
   },
   mutations: {
     setCount(state, payload) {
@@ -153,7 +156,6 @@ export default createStore({
         (date.getMonth() + 1).toString().padStart(2, "0") +
         date.getDate().toString().padStart(2, "0");
       const password = process.env.VUE_APP_PASS + formattedDate;
-      console.log("crypt pass:", process.env.VUE_APP_PASS);
 
       try {
         const response = await fetch(
@@ -163,8 +165,9 @@ export default createStore({
             }
           }
         )
-        const data = await response.json();
 
+        const data = await response.json();
+        
 
         const data1 = new Promise((resolve, reject) => {
           (async () => {
@@ -240,13 +243,13 @@ export default createStore({
       }
     },
     async weather({ commit }, date) {
-      console.log(date[0], date[1]);
       const response = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=41.625&longitude=-8.4375&elevation=35.4&current=relative_humidity_2m,apparent_temperature&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,rain_sum,showers_sum,wind_speed_10m_max,precipitation_hours,precipitation_probability_max,sunrise,sunset,et0_fao_evapotranspiration&timezone=Europe%2FLondon&start_date=${date[0]}&end_date=${date[1]}`
       );
       const data = await response.json();
-      commit("setWeather", data);
-      console.log("Weather:", data);
+      if(data){
+        commit("setWeather", data);
+      }
     },
   },
   modules: {},

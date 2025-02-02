@@ -168,6 +168,7 @@ const data = ref([
   margin-top: 1rem; /* Added margin-top */
   transition: all 0.3s ease; /* Smooth hover/focus animations */
   cursor: pointer;
+  margin-bottom: 3.5rem;
 }
 
 .options:hover {

@@ -15,7 +15,7 @@
     </div>
     <div class="container">
       <h3>
-        {{ percentage }}
+        {{ percentageg=='NaN'? "--": percentage }}
         <br />
         Ocupação
       </h3>
@@ -23,7 +23,7 @@
     </div>
     <div class="container">
       <h3>
-        {{ avg }}
+        {{ avg=='NaN'? "--": avg }}
         <br />
         Média
       </h3>
@@ -45,7 +45,7 @@ const count = computed(() => {
 let avgSum = 0;
 const avg = computed(() => {
   const day = store.getters.getDaily;
-  if (day == null) return -1;
+  if (day == null) return "--";
   day.forEach((element) => {
     avgSum += parseInt(element.count);
   });
@@ -73,7 +73,7 @@ const formattedDate = `${date.getDate()} de ${
 
 const percentage = computed(() => {
   const day = store.getters.getDaily;
-  if (day == null) return -1;
+  if (day == null) return "--";
   const active = day.filter(
     (element) => element.count > 0
   ).length;

@@ -16,6 +16,7 @@ import LogoDisplay from "@/components/NavBar.vue";
 import StatesSpec from "@/components/StatesSpec.vue";
 
 import { useStore } from "vuex";
+import { computed } from "vue";
 
 const store = useStore();
 
@@ -28,13 +29,20 @@ const formattedDate1 = fiveDaysBefore
   .split("T")[0];
 
 const [, month, day] = formattedDate.split("-");
-store.dispatch("fetch", `daily?day=${day}&month=${month}`);
 
+const daily= computed(() => store.getters.getDaily);
+if(daily.value==null)
+{
+store.dispatch("fetch", `daily?day=${day}&month=${month}`);
+}
 ///weather
-store.dispatch("weather", [
-  `${formattedDate1}`,
-  `${formattedDate}`,
-]);
+const weather = computed(() => store.getters.getWeather);
+if(weather.value==null){
+  store.dispatch("weather", [
+    `${formattedDate1}`,
+    `${formattedDate}`,
+  ]);
+}
 </script>
 
 <style scoped>

@@ -4,9 +4,20 @@
 
 <script setup>
 import { useStore } from "vuex";
+import { computed,watch } from "vue";
 
 const store = useStore();
+const socket = computed(()=>{
+ return store.getters.getSocket
+}
+)
 store.dispatch("connectToWebSocket");
+
+watch(socket,(newValue)=>{
+  if(newValue ==null){
+    store.dispatch("connectToWebSocket");
+  }
+})
 </script>
 
 <style>

@@ -32,7 +32,6 @@ const xAxis1 = computed(() => {
 const yAxis1 = computed(() => {
   const y = [];
   count.value.forEach((value) => {
-    console.log(value.count);
     y.push(value.count);
   });
   return y;
