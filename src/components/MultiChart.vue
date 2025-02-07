@@ -138,7 +138,7 @@ function slice() {
     data.value = [
       {
         name: legenda,
-        data: yAxis,
+        data: yAxisM,
       },
     ];
   }
