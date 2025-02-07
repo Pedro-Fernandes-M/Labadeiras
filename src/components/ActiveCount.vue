@@ -15,7 +15,7 @@
     </div>
     <div class="container">
       <h3>
-        {{ percentageg=='NaN'? "--": percentage }}
+        {{ percentage=='NaN'? "--": percentage }}
         <br />
         Ocupação
       </h3>
@@ -40,6 +40,7 @@ const store = useStore();
 
 const count = computed(() => {
   if (store.getters.getCount == -1) return "--";
+  else if(store.getters.getCount == null) return "-";
   else return store.getters.getCount;
 });
 let avgSum = 0;
@@ -77,7 +78,7 @@ const percentage = computed(() => {
   const active = day.filter(
     (element) => element.count > 0
   ).length;
-  return ((active / day.length) * 100).toFixed(0) + "%";
+  return ((active / 10) * 100).toFixed(0) + "%";
 });
 
 const bg = computed(() => {
@@ -105,6 +106,8 @@ function timer() {
   justify-content: center;
   align-items: center;
   padding-top: 1rem;
+  border-radius: 0.7rem;
+  padding: 0.35rem;
 }
 
 .flex {

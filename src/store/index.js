@@ -99,9 +99,9 @@ export default createStore({
                 "Atualização de person_count recebida:",
                 data.person_count
               );
-              if (state.count < data.person_count)
+              if (state.count <= data.person_count)
                 commit("setBg", "green");
-              else commit("setBg", "red");
+              else if(state.count > data.person_count) commit("setBg", "red");
               commit("setCount", data.person_count); // Update the count in the state
             } else {
               console.warn(
@@ -236,6 +236,7 @@ export default createStore({
         data1.then((result) => {
           let name = payload.replace("?", ",").split(",");
           commit(`set${name[0]}`, result);
+          localStorage.setItem("csv", Date.now());
           console.log(`${name[0]}:`, result);
         });
       } catch (error) {
@@ -249,6 +250,7 @@ export default createStore({
       const data = await response.json();
       if(data){
         commit("setWeather", data);
+        localStorage.setItem("weather", Date.now());
       }
     },
   },

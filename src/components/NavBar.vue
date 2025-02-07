@@ -20,7 +20,7 @@
 <style scoped>
 .logo {
   border-radius: 50%;
-  height: 25vh;
+  height: 20vh;
   border: 1px solid black;
 }
 .container1 {

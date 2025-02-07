@@ -1,12 +1,13 @@
 <template>
   <div>
-    <div v-if="weather != null && data != null">
+    <div v-if="weather != null && data != null" :class="{height:height}">
       <apexchart
         width="100%"
         height="200%"
         type="line"
         :options="MultiChart"
         :series="data"
+        id="multiChart"
       >
       </apexchart>
     </div>
@@ -66,6 +67,18 @@ const yAxis = computed(() => {
     const data = weather.value.daily.temperature_2m_max;
     return Object.values(data);
   } else if (option.value === "Precipitação") {
+    const value =weather.value.daily.precipitation_probability_max;
+    return Object.values(value);
+  } else if (option.value === "Chuva/Vento") {
+    const value = weather.value.daily.wind_speed_10m_max;
+    return Object.values(value);
+  } else return [];
+});
+const yAxisM = computed(() => {
+  if (option.value === "Temperatura") {
+    const value = weather.value.daily.temperature_2m_min;
+    return Object.values(value);
+  } else if (option.value === "Precipitação") {
     const data = weather.value.daily.precipitation_hours;
     return Object.values(data);
   } else if (option.value === "Chuva/Vento") {
@@ -76,19 +89,6 @@ const yAxis = computed(() => {
       weather.value.daily.et0_fao_evapotranspiration;
     return Object.values(data);
   } else return null;
-});
-const yAxisM = computed(() => {
-  if (option.value === "Temperatura") {
-    const value = weather.value.daily.temperature_2m_min;
-    return Object.values(value);
-  } else if (option.value === "Precipitação") {
-    const value =
-      weather.value.daily.precipitation_probability_max;
-    return Object.values(value);
-  } else if (option.value === "Chuva/Vento") {
-    const value = weather.value.daily.wind_speed_10m_max;
-    return Object.values(value);
-  } else return [];
 });
 
 const legenda = computed(() => {
@@ -154,6 +154,13 @@ const data = ref([
     data: yAxisM,
   },
 ]);
+
+const height = function () {
+  const chart = document.getElementById("multiChart");
+  if (chart) {
+    return chart.clientHeight + "px";
+  }
+}
 </script>
 
 <style scoped>

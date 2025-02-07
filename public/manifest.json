@@ -1,7 +1,7 @@
 {
-    "name": "Stats",
-    "short_name": "Stats",
-    "description": "An amazing Vue.js application.",
+    "name": "Tanque do Pobo",
+    "short_name": "TP",
+    "description": "Tanque Stats",
     "icons": [
       {
         "src": "./img/Tanque do Povo (1).922690da.png",

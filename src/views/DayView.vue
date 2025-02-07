@@ -1,6 +1,6 @@
 <template>
   <div>
-    <LogoDisplay></LogoDisplay>
+    <NavBar></NavBar>
     <ActiveCount></ActiveCount>
     <StatesSpec></StatesSpec>
     <CountChart></CountChart>
@@ -12,7 +12,7 @@
 import ActiveCount from "@/components/ActiveCount.vue";
 import CountChart from "@/components/CountChart.vue";
 import MultiChart from "@/components/MultiChart.vue";
-import LogoDisplay from "@/components/NavBar.vue";
+import NavBar from "@/components/NavBar.vue";
 import StatesSpec from "@/components/StatesSpec.vue";
 
 import { useStore } from "vuex";
@@ -31,13 +31,12 @@ const formattedDate1 = fiveDaysBefore
 const [, month, day] = formattedDate.split("-");
 
 const daily= computed(() => store.getters.getDaily);
-if(daily.value==null)
-{
-store.dispatch("fetch", `daily?day=${day}&month=${month}`);
+if(daily.value==null && (localStorage.getItem("csv") - Date.now()) < 60 * 60 * 1000){
+  store.dispatch("fetch", `daily?day=${day}&month=${month}`);
 }
 ///weather
 const weather = computed(() => store.getters.getWeather);
-if(weather.value==null){
+if(weather.value==null && (localStorage.getItem("weather") - Date.now()) < 60 * 60 * 1000){
   store.dispatch("weather", [
     `${formattedDate1}`,
     `${formattedDate}`,

@@ -16,7 +16,7 @@
         <h3>
           {{ humidity }}%
           <br />
-          Umidade
+          Humidade
         </h3>
         <div class="line"></div>
       </div>
@@ -48,6 +48,8 @@ const humidity = computed(
   justify-content: center;
   align-items: center;
   padding-bottom: 1.5rem;
+  border-radius: 0.7rem;
+  padding: 0.35rem;
 }
 .flex {
   display: flex;
