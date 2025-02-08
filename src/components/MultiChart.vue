@@ -1,13 +1,12 @@
 <template>
   <div>
-    <div v-if="weather != null && data != null" :class="{height:height}">
+    <div v-if="weather != null && data != null" id="multiChart" :style="{height: height}">
       <apexchart
         width="100%"
-        height="200%"
+        height=350
         type="line"
         :options="MultiChart"
         :series="data"
-        id="multiChart"
       >
       </apexchart>
     </div>
@@ -155,12 +154,18 @@ const data = ref([
   },
 ]);
 
-const height = function () {
+function getheight () {
   const chart = document.getElementById("multiChart");
   if (chart) {
-    return chart.clientHeight + "px";
+    return chart.offsetHeight + "px";
   }
+  else return null;
 }
+let height = ref(null);
+setTimeout(()=>{
+  height = getheight();
+},100)
+
 </script>
 
 <style scoped>

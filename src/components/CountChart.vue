@@ -5,7 +5,7 @@
   >
     <apexchart
       width="100%"
-      height="200%"
+      height=350
       type="bar"
       :options="chartOptions"
       :series="series"
