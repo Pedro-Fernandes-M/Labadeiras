@@ -78,7 +78,7 @@ const percentage = computed(() => {
   const active = day.filter(
     (element) => element.count > 0
   ).length;
-  return ((active / 10) * 100).toFixed(0) + "%";
+  return ((active / day.length) * 100).toFixed(0) + "%";
 });
 
 const bg = computed(() => {

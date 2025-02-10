@@ -44,20 +44,6 @@ const xAxis = computed(() => {
   });
   return array;
 });
-const MultiChart = ref({
-  chart: {
-    toolbar: {
-      show: false, // Disable toolbar
-    },
-    zoom: {
-      enabled: false,
-    },
-    
-  },
-  xaxis: {
-    categories: xAxis,
-  },
-});
 
 
 const yAxis = computed(() => {
@@ -97,7 +83,7 @@ const legenda = computed(() => {
     return "Temperatura_Max(°C)";
   } else if (option.value === "Precipitação") {
     slice();
-    return "Precipitação_Horas";
+    return "Precipitação(%)";
   } else if (option.value === "Chuva/Vento") {
     slice();
     return "Chuva_Sum(mm)";
@@ -167,6 +153,34 @@ let height = ref(null);
 setTimeout(()=>{
   height = getheight();
 },100)
+
+const MultiChart = ref({
+  chart: {
+    toolbar: {
+      show: false, // Disable toolbar
+    },
+    zoom: {
+      enabled: false,
+    },
+    
+  },
+  xaxis: {
+    categories: xAxis,
+  },
+  yaxis: [
+    {
+      title: {
+        text: legenda.value
+      },
+    },
+    {
+      opposite: true,
+      title: {
+        text: legenda1.value
+      }
+    }
+  ],
+});
 
 </script>
 

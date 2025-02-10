@@ -60,7 +60,7 @@ export default createStore({
   actions: {
     async fetchWebSocketURL() {
       try {
-          const response = await fetch(process.env.VUE_APP_API_URL + 'websocket-url?token=2024',{
+          const response = await fetch(process.env.VUE_APP_API_URL + 'websocket-url?token='+process.env.VUE_APP_TOKEN,{
             headers: {
                 'ngrok-skip-browser-warning': 'true'
             }
@@ -75,7 +75,6 @@ export default createStore({
   },
   async connectToWebSocket({ commit, state,dispatch }) {
       const url = await dispatch('fetchWebSocketURL');
-      console.log(url)
         if (!url) {
             throw new Error('WebSocket URL is undefined or empty');
         }
@@ -99,13 +98,7 @@ export default createStore({
           try {
             const data = JSON.parse(event.data);
 
-            // Expecting a message like:
-            // { "person_count": 1, "timestamp": 1735341163.1846309 }
             if (data.person_count !== undefined) {
-              console.log(
-                "Atualização de person_count recebida:",
-                data.person_count
-              );
               if (state.count <= data.person_count)
                 commit("setBg", "green");
               else if(state.count > data.person_count) commit("setBg", "red");
@@ -246,7 +239,6 @@ export default createStore({
           if(name[0] === "daily"){
           localStorage.setItem("csv",data.stamp);
           }
-          console.log(`${name[0]}:`, data.stamp);
         });
       } catch (error) {
         console.error("Error fetching data:", error);

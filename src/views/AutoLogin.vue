@@ -30,7 +30,6 @@ async function getauth(){
         const fp = await FingerprintJS.load();
         const result = await fp.get();
         
-        console.log("Visitor ID:", result.visitorId);
         id= result.visitorId;
     } catch (err) {
         console.error("FingerprintJS Error:", err);
@@ -43,14 +42,9 @@ async function getauth(){
     }
     })
     const data = await response.json();
-    console.log(data.auth);
     store.commit('setAuth', data.auth);
         if( data.auth===true){
             router.push('/day')
-            console.log("Authenticated");
-        }
-        else{
-            console.log("Not Authenticated");
         }
     }
 }
