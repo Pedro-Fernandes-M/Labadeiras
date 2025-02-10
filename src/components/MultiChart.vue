@@ -1,6 +1,9 @@
 <template>
   <div>
     <div v-if="weather != null && data != null" id="multiChart" :style="{height: height}">
+      <h3 class="margin">
+        {{ option }}
+      </h3>
       <apexchart
         width="100%"
         height=350
@@ -30,6 +33,7 @@ const store = useStore();
 const weather = computed(() => store.getters.getWeather);
 const option = ref("Temperatura");
 
+
 const xAxis = computed(() => {
   const a = weather.value.daily.time;
   const b = Object.values(a);
@@ -48,19 +52,14 @@ const MultiChart = ref({
     zoom: {
       enabled: false,
     },
-  },
-  title: {
-    text: `${option.value}`,
-    align: "center",
-    style: {
-      fontSize: "18px",
-      fontWeight: "bold",
-    },
+    
   },
   xaxis: {
     categories: xAxis,
   },
 });
+
+
 const yAxis = computed(() => {
   if (option.value === "Temperatura") {
     const data = weather.value.daily.temperature_2m_max;
@@ -71,7 +70,9 @@ const yAxis = computed(() => {
   } else if (option.value === "Chuva/Vento") {
     const value = weather.value.daily.wind_speed_10m_max;
     return Object.values(value);
-  } else return [];
+  } else{ 
+    return []
+  }
 });
 const yAxisM = computed(() => {
   if (option.value === "Temperatura") {
@@ -161,6 +162,7 @@ function getheight () {
   }
   else return null;
 }
+
 let height = ref(null);
 setTimeout(()=>{
   height = getheight();
@@ -191,5 +193,9 @@ setTimeout(()=>{
 .options:focus {
   border-color: #26a0fc; /* Highlight border on focus */
   box-shadow: 0 0 0.25rem rgba(38, 160, 252, 0.3); /* Subtle glow (4px converted to rem) */
+}
+
+.margin{
+  margin-bottom: -0.2rem;
 }
 </style>

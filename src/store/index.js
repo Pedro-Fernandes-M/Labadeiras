@@ -3,6 +3,7 @@ import { createStore } from "vuex";
 
 export default createStore({
   state: {
+    auth: null,
     count: -1, // Stores the current person count
     socket: null, // Stores the WebSocket instance
     yearly: null,
@@ -11,6 +12,9 @@ export default createStore({
     bg: null,
   },
   getters: {
+    getAuth(state) {
+      return state.auth; // Returns the authentication status
+    },
     getCount(state) {
       return state.count; // Returns the current person count
     },
@@ -31,6 +35,9 @@ export default createStore({
     },
   },
   mutations: {
+    setAuth(state, payload) {
+      state.auth = payload; // Updates the authentication status
+    },
     setCount(state, payload) {
       state.count = payload; // Updates the count with the new person_count value
     },
@@ -236,8 +243,10 @@ export default createStore({
         data1.then((result) => {
           let name = payload.replace("?", ",").split(",");
           commit(`set${name[0]}`, result);
-          localStorage.setItem("csv", Date.now());
-          console.log(`${name[0]}:`, result);
+          if(name[0] === "daily"){
+          localStorage.setItem("csv",data.stamp);
+          }
+          console.log(`${name[0]}:`, data.stamp);
         });
       } catch (error) {
         console.error("Error fetching data:", error);

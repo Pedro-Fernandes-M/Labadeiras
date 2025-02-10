@@ -3,6 +3,9 @@
     v-if="count != null && count.length > 1"
     class="container"
   >
+    <h3 class="margin">
+      Contagem
+    </h3>
     <apexchart
       width="100%"
       height=350
@@ -42,14 +45,6 @@ const chartOptions = ref({
       show: false, // Disable toolbar
     },
   },
-  title: {
-    text: "Contagem",
-    align: "center",
-    style: {
-      fontSize: "18px",
-      fontWeight: "bold",
-    },
-  },
   xaxis: {
     categories: xAxis1,
   },
@@ -66,5 +61,8 @@ const series = ref([
 .container {
   margin-top: 1rem;
   margin-bottom: 3rem;
+}
+.margin{
+  margin-bottom: -0.2rem;
 }
 </style>

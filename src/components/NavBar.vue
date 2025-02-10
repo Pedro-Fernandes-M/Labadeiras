@@ -7,7 +7,7 @@
     />
   </div>
   <div class="container">
-    <RouterLink to="/">Diário</RouterLink>
+    <RouterLink to="/day">Diário</RouterLink>
     <RouterLink to="/year" class="item">
       Explorar
     </RouterLink>
