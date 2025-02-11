@@ -14,7 +14,7 @@
       </apexchart>
     </div>
     <WarningPop v-else :nome="option"></WarningPop>
-    <select v-model="option" class="options">
+    <select v-model="option" class="options" id="options">
       <option>Temperatura</option>
       <option>Precipitação</option>
       <option>Chuva/Vento</option>
