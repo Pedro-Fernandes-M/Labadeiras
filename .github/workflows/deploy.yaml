@@ -29,6 +29,7 @@ jobs:
         env:
           VUE_APP_API_URL: ${{ secrets.VUE_APP_API_URL }}
           VUE_APP_PASS: ${{ secrets.VUE_APP_PASS }}
+          VUE_APP_TOKEN: ${{ secrets.VUE_APP_TOKEN }}
 
 
       - name: Deploy to GitHub Pages
