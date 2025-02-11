@@ -44,7 +44,11 @@ async function getauth(){
     const data = await response.json();
     store.commit('setAuth', data.auth);
         if( data.auth===true){
-            router.push('/day')
+            router.replace('/day')
+            setTimeout(()=>{
+                store.commit('setAuth', null);
+                router.replace('/');
+            },360000)
         }
     }
 }
@@ -52,6 +56,7 @@ async function getauth(){
 getauth();
 
 const auth = computed(() => store.getters.getAuth);
+
 </script>
 
 <style scoped>

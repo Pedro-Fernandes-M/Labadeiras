@@ -83,10 +83,10 @@ const legenda = computed(() => {
     return "Temperatura_Max(°C)";
   } else if (option.value === "Precipitação") {
     slice();
-    return "Precipitação(%)";
+    return "Precipitação_Prob_Máx(%)";
   } else if (option.value === "Chuva/Vento") {
     slice();
-    return "Chuva_Sum(mm)";
+    return "Velocidade_Vento_Max(Km/H)";
   } else if (option.value === "Evaporação") {
     slice();
     return "Evapotranspiração(mm)";
@@ -97,9 +97,9 @@ const legenda1 = computed(() => {
   if (option.value === "Temperatura") {
     return "Temperatura_Min(°C)";
   } else if (option.value === "Precipitação") {
-    return "Precipitação_Prob_Máx(%)";
+    return "Precipitação_Horas";
   } else if (option.value === "Chuva/Vento") {
-    return "Velocidade_Vento_Max(KM/H)";
+    return "Chuva_Sum(mm)";
   } else {
     return "";
   }
@@ -132,11 +132,11 @@ function slice() {
 
 const data = ref([
   {
-    name: legenda,
+    name: legenda1,
     data: yAxis,
   },
   {
-    name: legenda1,
+    name: legenda,
     data: yAxisM,
   },
 ]);
@@ -167,19 +167,7 @@ const MultiChart = ref({
   xaxis: {
     categories: xAxis,
   },
-  yaxis: [
-    {
-      title: {
-        text: legenda.value
-      },
-    },
-    {
-      opposite: true,
-      title: {
-        text: legenda1.value
-      }
-    }
-  ],
+
 });
 
 </script>
