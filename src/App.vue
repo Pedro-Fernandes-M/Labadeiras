@@ -12,7 +12,6 @@ document.addEventListener("keydown", (event) => {
         (event.ctrlKey && event.key === "J") || 
         (event.ctrlKey && event.key === "U")) {
         event.preventDefault();
-        alert("DevTools is disabled!");
     }
 });
 </script>
