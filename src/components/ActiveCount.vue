@@ -15,7 +15,7 @@
     </div>
     <div class="container">
       <h3>
-        {{ percentage=='NaN'? "--": percentage }}
+        {{ isNaN(percentage)=='NaN'? "--": percentage }}
         <br />
         Ocupação
       </h3>
@@ -23,7 +23,7 @@
     </div>
     <div class="container">
       <h3>
-        {{ avg=='NaN'? "--": avg }}
+        {{ isNaN(avg)? "--": avg }}
         <br />
         Média
       </h3>

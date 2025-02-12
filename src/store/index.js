@@ -97,15 +97,15 @@ export default createStore({
         socket.onmessage = (event) => {
           try {
             const data = JSON.parse(event.data);
-
-            if (data.person_count !== undefined) {
-              if (state.count <= data.person_count)
+            console.log("data:"+data)
+            if (data.count !== undefined) {
+              if (state.count <= data.count)
                 commit("setBg", "green");
-              else if(state.count > data.person_count) commit("setBg", "red");
-              commit("setCount", data.person_count); // Update the count in the state
+              else if(state.count > data.count) commit("setBg", "red");
+              commit("setCount", data.count); // Update the count in the state
             } else {
               console.warn(
-                "Mensagem WebSocket recebida não contém person_count:",
+                "Mensagem WebSocket recebida não contém count:",
                 data
               );
             }

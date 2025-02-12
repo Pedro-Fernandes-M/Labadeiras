@@ -4,8 +4,16 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-createApp(App)
-  .use(store)
-  .use(router)
-  .use(VueApexCharts)
-  .mount("#app");
+// Create the Vue app instance
+const app = createApp(App);
+
+// Use your plugins
+app.use(store);
+app.use(router);
+app.use(VueApexCharts);
+
+// Disable Vue DevTools
+app.config.devtools = false;
+
+// Mount the app
+app.mount("#app");

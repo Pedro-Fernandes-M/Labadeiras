@@ -174,7 +174,6 @@ const MultiChart = ref({
 
 <style scoped>
 .options {
-  width: 9.375rem; /* 150px converted to rem (150 / 16) */
   padding: 0.5rem; /* 8px converted to rem (8 / 16) */
   font-size: 0.875rem; /* 14px converted to rem (14 / 16) */
   background-color: #f9f9f9; /* Background color */
@@ -190,11 +189,18 @@ const MultiChart = ref({
 .options:hover {
   background-color: #f1f1f1; /* Slightly darker on hover */
   border-color: #aaa; /* Change border color on hover */
+
+}
+option{
+  border-radius: 1rem;
+  margin-bottom: 1rem;
 }
 
 .options:focus {
   border-color: #26a0fc; /* Highlight border on focus */
-  box-shadow: 0 0 0.25rem rgba(38, 160, 252, 0.3); /* Subtle glow (4px converted to rem) */
+   /* Subtle glow (4px converted to rem) */
+  box-shadow: 0 0 0 4px rgba(38, 160, 252, 0.1);
+  outline: none;
 }
 
 .margin{

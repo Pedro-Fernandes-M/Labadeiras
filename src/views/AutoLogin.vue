@@ -44,11 +44,12 @@ async function getauth(){
     const data = await response.json();
     store.commit('setAuth', data.auth);
         if( data.auth===true){
+            store.dispatch("connectToWebSocket");
             router.replace('/day')
             setTimeout(()=>{
                 store.commit('setAuth', null);
                 router.replace('/');
-            },360000)
+            },1800000)
         }
     }
 }

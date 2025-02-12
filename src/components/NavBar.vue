@@ -2,7 +2,7 @@
   <div class="container1">
     <img
       class="logo"
-      src="../assets/Tanque do Povo (1).png"
+      src="../assets/Tanque do Pobo (1).png"
       alt="Tanque do Pobo"
     />
   </div>

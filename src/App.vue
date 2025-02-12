@@ -3,21 +3,18 @@
 </template>
 
 <script setup>
-import { useStore } from "vuex";
-import { computed,watch } from "vue";
+document.addEventListener("contextmenu", (event) => event.preventDefault());
 
-const store = useStore();
-const socket = computed(()=>{
- return store.getters.getSocket
-}
-)
-store.dispatch("connectToWebSocket");
-
-watch(socket,(newValue)=>{
-  if(newValue ==null){
-    store.dispatch("connectToWebSocket");
-  }
-})
+// Disable F12, Ctrl+Shift+I, and Ctrl+U
+document.addEventListener("keydown", (event) => {
+    if (event.key === "F12" || 
+        (event.ctrlKey && event.shiftKey && event.key === "I") || 
+        (event.ctrlKey && event.key === "J") || 
+        (event.ctrlKey && event.key === "U")) {
+        event.preventDefault();
+        alert("DevTools is disabled!");
+    }
+});
 </script>
 
 <style>
